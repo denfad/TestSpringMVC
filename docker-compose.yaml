@@ -1,0 +1,20 @@
+version: "3.4"
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: page/server
+    ports:
+      - '8080:8080'
+    volumes:
+      - app-logs:/usr/local/tomcat/logs
+    networks:
+      backend: { aliases: [app.backend] }
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  app-logs:
